@@ -35,7 +35,10 @@ function unIndent (strings) {
 // ------------------------------------------------------------------------------
 
 const tester = new RuleTester({
-  parser: 'vue-eslint-parser'
+  parser: 'vue-eslint-parser',
+  parserOptions: {
+    ecmaVersion: 2015
+  }
 })
 
 tester.run('html-indent', rule, {
@@ -55,7 +58,7 @@ tester.run('html-indent', rule, {
                   =
           ></div>
       </template>
-      `,
+    `,
     unIndent`
       <template>
           <div a="a"
@@ -69,7 +72,50 @@ tester.run('html-indent', rule, {
                    =
           ></div>
       </template>
-      `
+    `,
+    unIndent`
+      <template>
+          <div a="
+          a" b="b"></div>
+      </template>
+    `,
+
+    // VExpressionContainer
+    unIndent`
+      <template>
+          <div
+              :foo="
+                  value
+              "
+          ></div>
+      </template>
+    `,
+
+    // VForExpression
+    unIndent`
+      <template>
+          <div
+              v-for="
+                  x
+                      in
+                          xs
+              "
+          ></div>
+          <div
+              v-for="
+                  (
+                      x
+                      ,
+                      y
+                      ,
+                      z
+                  )
+                      of
+                          xs
+              "
+          ></div>
+      </template>
+    `
   ],
   invalid: [
     // VAttribute
@@ -93,6 +139,84 @@ tester.run('html-indent', rule, {
       `,
       errors: [
         { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 3 }
+      ]
+    },
+
+    // VEndTag
+    {
+      code: unIndent`
+        <template>
+          </template
+      `,
+      errors: [
+        { message: 'Expected indentation of 0 spaces but found 2 spaces.', line: 2 }
+      ]
+    },
+
+    // VExpressionContainer
+    {
+      code: unIndent`
+        <template>
+            <div
+                :a="
+                  value
+              "
+                :b=
+                  value
+                :c=
+                  'value'
+            >
+                {{
+                  value
+              }}
+            </div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 5 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 8 spaces but found 6 spaces.', line: 13 }
+      ]
+    },
+
+    // VForExpression
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-for="
+                  x
+                  in
+                  xs
+                "
+            ></div>
+            <div
+                v-for="
+                  (
+                  x
+                  ,
+                  y
+                  ,
+                  z
+                  )
+                  of
+                  xs
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 11 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 19 }
       ]
     }
   ]
