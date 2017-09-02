@@ -303,6 +303,448 @@ tester.run('html-indent', rule, {
       </template>
     `,
 
+    // ClassExpression / ClassDeclaration
+    unIndent`
+      <template>
+          <div
+              v-on:a="
+                  class
+                      A
+                  {
+                      foo(){}
+                      bar(){}
+                  }
+              "
+              v-on:b="
+                  class
+                      A
+                      extends
+                          B
+                  {
+                      ;
+                      foo(){}
+                      ;
+                      bar(){}
+                      ;
+                  }
+              "
+              v-on:b="
+                  !class
+                      extends
+                          B
+                  {
+                      ;
+                      foo(){}
+                      ;
+                      bar(){}
+                      ;
+                  }
+              "
+          ></div>
+      </template>
+    `,
+
+    // ConditionalExpression
+    unIndent`
+      <template>
+          <div
+              v-bind:a="
+                  a
+                      ? b
+                      : c
+              "
+              v-bind:b="
+                  a ?
+                      b :
+                      c
+              "
+              v-bind:c="
+                  a
+                      ?
+                          b
+                      :
+                          c
+              "
+              v-bind:d="
+                  a
+                      ? b
+                      : c
+                          ? d
+                          : e
+              "
+              v-bind:e="
+                  a ? 1 :
+                  b ? 2 :
+                  /*else*/ 3
+              "
+          ></div>
+      </template>
+    `,
+
+    // DoWhileStatement
+    unIndent`
+      <template>
+          <div
+              v-on:a="
+                  do
+                      ;
+                  while
+                      (
+                          a
+                      )
+              "
+              v-on:b="
+                  do
+                  {
+                      ;
+                  }
+                  while
+                      (
+                          a
+                      )
+              "
+              v-on:c="
+                  do {
+                      ;
+                  } while (
+                      a
+                  )
+              "
+          ></div>
+      </template>
+    `,
+
+    // ForInStatement, ForOfStatement
+    unIndent`
+      <template>
+          <div
+              v-on:a="
+                  for
+                      (
+                          a
+                              in
+                              b
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:b="
+                  for (
+                      a
+                          of
+                          b
+                  )
+                  {
+                      ;
+                  }
+              "
+              v-on:c="
+                  for (
+                      a
+                          in
+                          b
+                  ) {
+                      ;
+                  }
+              "
+          ></div>
+      </template>
+    `,
+
+    // ForStatement
+    unIndent`
+      <template>
+          <div
+              v-on:a="
+                  for
+                      (
+                          a
+                          ;
+                          b
+                          ;
+                          c
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:b="
+                  for
+                      (
+                          ;
+                          b
+                          ;
+                          c
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:c="
+                  for
+                      (
+                          a
+                          ;
+                          ;
+                          c
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:d="
+                  for
+                      (
+                          a
+                          ;
+                          d
+                          ;
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:e="
+                  for
+                      (
+                          ;
+                          ;
+                      )
+                  {
+                      ;
+                  }
+              "
+          ></div>
+      </template>
+    `,
+
+    // FunctionDeclaration, FunctionExpression
+    unIndent`
+      <template>
+          <div
+              v-on:a="
+                  function
+                      foo
+                      (
+                          a
+                          ,
+                          b
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:b="
+                  !function
+                      (
+                          a
+                          ,
+                          b
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:c="
+                  function
+                      *
+                      foo
+                      (
+                          a
+                          ,
+                          b
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:d="
+                  !function
+                      *
+                      (
+                          a
+                          ,
+                          b
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:e="
+                  async function
+                      foo
+                      (
+                          a
+                          ,
+                          b
+                      )
+                  {
+                      ;
+                  }
+              "
+          ></div>
+      </template>
+    `,
+
+    // IfStatement
+    unIndent`
+      <template>
+          <div
+              v-on:a="
+                  if
+                      (
+                          a
+                      )
+                  {
+                      ;
+                  }
+              "
+              v-on:b="
+                  if
+                      (
+                          a
+                      )
+                  {
+                      ;
+                  }
+                  else
+                  {
+                      ;
+                  }
+              "
+              v-on:c="
+                  if (a)
+                      ;
+                  else if (b)
+                      ;
+                  else
+                      ;
+              "
+          ></div>
+      </template>
+    `,
+
+    // MemberExpression, MetaProperty
+    unIndent`
+      <template>
+          <div
+              v-bind:a="
+                  obj
+                      .aaa
+                      .bbb
+                      .ccc
+              "
+              v-bind:b="
+                  obj.
+                      aaa.
+                      bbb.
+                      ccc
+              "
+              v-bind:c="
+                  obj
+                      [
+                          0
+                      ]
+                      [
+                          1
+                      ]
+                      [
+                          2
+                      ]
+              "
+              v-bind:d="
+                  function wrap() {
+                      new
+                          .
+                          target
+                  }
+              "
+          ></div>
+      </template>
+    `,
+
+    // MethodDefinition, Property
+    unIndent`
+      <template>
+          <div
+              v-bind:a="{
+                  aaa
+                      :
+                      1
+                  ,
+                  bbb
+                      (
+                          a
+                          ,
+                          b
+                      )
+                  {
+                      ;
+                  }
+                  ,
+                  get
+                  ccc
+                      (
+                      )
+                  {
+                      ;
+                  },
+                  [
+                      d
+                  ]
+                      :
+                      1,
+                  get
+                  [
+                      e
+                  ]
+                      (
+                      )
+                  {
+                      ;
+                  }
+              }"
+              v-bind:b="class {
+                  bbb
+                      (
+                          a
+                          ,
+                          b
+                      )
+                  {
+                      ;
+                  }
+                  static
+                  get
+                  ccc
+                      (
+                      )
+                  {
+                      ;
+                  }
+                  [
+                      d
+                  ]
+                      (
+                      )
+                  {
+                      ;
+                  }
+                  get
+                  [
+                      e
+                  ]
+                      (
+                      )
+                  {
+                      ;
+                  }
+              }"
+          ></div>
+      </template>
+    `,
+
     // ObjectExpression
     unIndent`
       <template>
@@ -352,6 +794,47 @@ tester.run('html-indent', rule, {
               v-on:b="
                   return a
                   ;
+              "
+          ></div>
+      </template>
+    `,
+
+    // TryStatement / CatchClause
+    unIndent`
+      <template>
+          <div
+              v-on:a="
+                  try
+                  {
+                  }
+                  catch
+                      (
+                          err
+                      )
+                  {
+                  }
+              "
+              v-on:b="
+                  try
+                  {
+                  }
+                  finally
+                  {
+                  }
+              "
+              v-on:c="
+                  try
+                  {
+                  }
+                  catch
+                      (
+                          err
+                      )
+                  {
+                  }
+                  finally
+                  {
+                  }
               "
           ></div>
       </template>
@@ -1024,6 +1507,1210 @@ tester.run('html-indent', rule, {
       ]
     },
 
+    // ClassExpression / ClassDeclaration
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-on:a="
+                  class
+                  A
+                  {
+                  foo(){}
+                  bar(){}
+                  }
+                "
+                v-on:b="
+                  class
+                  A
+                  extends
+                  B
+                  {
+                  ;
+                  foo(){}
+                  ;
+                  bar(){}
+                  ;
+                  }
+                "
+                v-on:b="
+                  !class
+                  extends
+                  B
+                  {
+                  ;
+                  foo(){}
+                  ;
+                  bar(){}
+                  ;
+                  }
+                "
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-on:a="
+                    class
+                        A
+                    {
+                        foo(){}
+                        bar(){}
+                    }
+                "
+                v-on:b="
+                    class
+                        A
+                        extends
+                            B
+                    {
+                        ;
+                        foo(){}
+                        ;
+                        bar(){}
+                        ;
+                    }
+                "
+                v-on:b="
+                    !class
+                        extends
+                            B
+                    {
+                        ;
+                        foo(){}
+                        ;
+                        bar(){}
+                        ;
+                    }
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 8 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 13 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 14 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 15 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 20 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 21 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 22 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 25 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 26 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 27 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 28 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 29 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 30 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 31 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 32 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 33 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 34 }
+      ]
+    },
+
+    // ConditionalExpression
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-bind:a="
+                  a
+                  ? b
+                  : c
+                "
+                v-bind:b="
+                  a ?
+                  b :
+                  c
+                "
+                v-bind:c="
+                  a
+                  ?
+                  b
+                  :
+                  c
+                "
+                v-bind:d="
+                  a
+                  ? b
+                  : c
+                  ? d
+                  : e
+                "
+                v-bind:e="
+                  a ? 1 :
+                  b ? 2 :
+                  /*else*/ 3
+                "
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-bind:a="
+                    a
+                        ? b
+                        : c
+                "
+                v-bind:b="
+                    a ?
+                        b :
+                        c
+                "
+                v-bind:c="
+                    a
+                        ?
+                            b
+                        :
+                            c
+                "
+                v-bind:d="
+                    a
+                        ? b
+                        : c
+                            ? d
+                            : e
+                "
+                v-bind:e="
+                    a ? 1 :
+                    b ? 2 :
+                    /*else*/ 3
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 10 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 11 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 14 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 15 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 21 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 22 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 23 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 24 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 25 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 28 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 29 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 30 }
+      ]
+    },
+
+    // DoWhileStatement
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-on:a="
+                  do
+                  ;
+                  while
+                  (
+                  a
+                  )
+                "
+                v-on:b="
+                  do
+                  {
+                  ;
+                  }
+                  while
+                  (
+                  a
+                  )
+                "
+                v-on:c="
+                  do {
+                  ;
+                  } while (
+                  a
+                  )
+                "
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-on:a="
+                    do
+                        ;
+                    while
+                        (
+                            a
+                        )
+                "
+                v-on:b="
+                    do
+                    {
+                        ;
+                    }
+                    while
+                        (
+                            a
+                        )
+                "
+                v-on:c="
+                    do {
+                        ;
+                    } while (
+                        a
+                    )
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 8 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 13 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 14 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 15 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 22 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 23 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 24 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 25 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 26 }
+      ]
+    },
+
+    // ForInStatement, ForOfStatement
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-on:a="
+                  for
+                  (
+                  a
+                  in
+                  b
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:b="
+                  for (
+                  a
+                  of
+                  b
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:c="
+                  for (
+                  a
+                  in
+                  b
+                  ) {
+                  ;
+                  }
+                "
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-on:a="
+                    for
+                        (
+                            a
+                                in
+                                b
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:b="
+                    for (
+                        a
+                            of
+                            b
+                    )
+                    {
+                        ;
+                    }
+                "
+                v-on:c="
+                    for (
+                        a
+                            in
+                            b
+                    ) {
+                        ;
+                    }
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 24 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 24 spaces but found 10 spaces.', line: 8 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 10 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 11 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 15 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 20 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 21 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 22 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 25 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 26 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 27 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 28 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 29 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 30 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 31 }
+      ]
+    },
+
+    // ForStatement
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-on:a="
+                  for
+                  (
+                  a
+                  ;
+                  b
+                  ;
+                  c
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:b="
+                  for
+                  (
+                  ;
+                  b
+                  ;
+                  c
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:c="
+                  for
+                  (
+                  a
+                  ;
+                  ;
+                  c
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:d="
+                  for
+                  (
+                  a
+                  ;
+                  d
+                  ;
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:e="
+                  for
+                  (
+                  ;
+                  ;
+                  )
+                  {
+                  ;
+                  }
+                "
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-on:a="
+                    for
+                        (
+                            a
+                            ;
+                            b
+                            ;
+                            c
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:b="
+                    for
+                        (
+                            ;
+                            b
+                            ;
+                            c
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:c="
+                    for
+                        (
+                            a
+                            ;
+                            ;
+                            c
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:d="
+                    for
+                        (
+                            a
+                            ;
+                            d
+                            ;
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:e="
+                    for
+                        (
+                            ;
+                            ;
+                        )
+                    {
+                        ;
+                    }
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 8 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 10 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 11 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 13 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 14 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 20 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 21 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 22 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 23 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 24 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 25 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 26 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 29 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 30 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 31 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 32 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 33 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 34 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 35 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 36 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 37 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 38 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 41 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 42 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 43 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 44 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 45 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 46 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 47 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 48 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 49 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 50 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 53 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 54 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 55 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 56 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 57 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 58 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 59 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 60 }
+      ]
+    },
+
+    // FunctionDeclaration, FunctionExpression
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-on:a="
+                  function
+                  foo
+                  (
+                  a
+                  ,
+                  b
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:b="
+                  !function
+                  (
+                  a
+                  ,
+                  b
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:c="
+                  function
+                  *
+                  foo
+                  (
+                  a
+                  ,
+                  b
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:d="
+                  !function
+                  *
+                  (
+                  a
+                  ,
+                  b
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:e="
+                  async function
+                  foo
+                  (
+                  a
+                  ,
+                  b
+                  )
+                  {
+                  ;
+                  }
+                "
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-on:a="
+                    function
+                        foo
+                        (
+                            a
+                            ,
+                            b
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:b="
+                    !function
+                        (
+                            a
+                            ,
+                            b
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:c="
+                    function
+                        *
+                        foo
+                        (
+                            a
+                            ,
+                            b
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:d="
+                    !function
+                        *
+                        (
+                            a
+                            ,
+                            b
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:e="
+                    async function
+                        foo
+                        (
+                            a
+                            ,
+                            b
+                        )
+                    {
+                        ;
+                    }
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 8 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 10 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 11 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 13 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 20 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 21 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 22 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 23 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 24 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 27 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 28 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 29 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 30 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 31 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 32 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 33 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 34 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 35 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 36 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 37 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 40 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 41 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 42 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 43 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 44 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 45 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 46 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 47 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 48 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 49 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 52 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 53 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 54 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 55 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 56 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 57 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 58 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 59 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 60 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 61 }
+      ]
+    },
+
+    // IfStatement
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-on:a="
+                  if
+                  (
+                  a
+                  )
+                  {
+                  ;
+                  }
+                "
+                v-on:b="
+                  if
+                  (
+                  a
+                  )
+                  {
+                  ;
+                  }
+                  else
+                  {
+                  ;
+                  }
+                "
+                v-on:c="
+                  if (a)
+                  ;
+                  else if (b)
+                  ;
+                  else
+                  ;
+                "
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-on:a="
+                    if
+                        (
+                            a
+                        )
+                    {
+                        ;
+                    }
+                "
+                v-on:b="
+                    if
+                        (
+                            a
+                        )
+                    {
+                        ;
+                    }
+                    else
+                    {
+                        ;
+                    }
+                "
+                v-on:c="
+                    if (a)
+                        ;
+                    else if (b)
+                        ;
+                    else
+                        ;
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 8 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 10 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 13 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 14 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 15 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 20 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 21 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 22 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 23 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 26 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 27 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 28 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 29 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 30 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 31 }
+      ]
+    },
+
+    // MemberExpression, MetaProperty
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-bind:a="
+                  obj
+                  .aaa
+                  .bbb
+                  .ccc
+                "
+                v-bind:b="
+                  obj.
+                  aaa.
+                  bbb.
+                  ccc
+                "
+                v-bind:c="
+                  obj
+                  [
+                  0
+                  ]
+                  [
+                  1
+                  ]
+                  [
+                  2
+                  ]
+                "
+                v-bind:d="
+                    function wrap() {
+                  new
+                  .
+                  target
+                    }
+                "
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-bind:a="
+                    obj
+                        .aaa
+                        .bbb
+                        .ccc
+                "
+                v-bind:b="
+                    obj.
+                        aaa.
+                        bbb.
+                        ccc
+                "
+                v-bind:c="
+                    obj
+                        [
+                            0
+                        ]
+                        [
+                            1
+                        ]
+                        [
+                            2
+                        ]
+                "
+                v-bind:d="
+                    function wrap() {
+                        new
+                            .
+                            target
+                    }
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 10 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 11 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 13 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 20 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 21 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 22 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 23 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 24 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 25 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 29 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 30 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 31 }
+      ]
+    },
+
+    // MethodDefinition, Property
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-bind:a="{
+                  aaa
+                  :
+                  1
+                  ,
+                  bbb
+                  (
+                  a
+                  ,
+                  b
+                  )
+                  {
+                  ;
+                  }
+                  ,
+                  get
+                  ccc
+                  (
+                  )
+                  {
+                  ;
+                  },
+                  [
+                  d
+                  ]
+                  :
+                  1,
+                  get
+                  [
+                  e
+                  ]
+                  (
+                  )
+                  {
+                  ;
+                  }
+                }"
+                v-bind:b="class {
+                  bbb
+                  (
+                  a
+                  ,
+                  b
+                  )
+                  {
+                  ;
+                  }
+                  static
+                  get
+                  ccc
+                  (
+                  )
+                  {
+                  ;
+                  }
+                  [
+                  d
+                  ]
+                  (
+                  )
+                  {
+                  ;
+                  }
+                  get
+                  [
+                  e
+                  ]
+                  (
+                  )
+                  {
+                  ;
+                  }
+                }"
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-bind:a="{
+                    aaa
+                        :
+                        1
+                    ,
+                    bbb
+                        (
+                            a
+                            ,
+                            b
+                        )
+                    {
+                        ;
+                    }
+                    ,
+                    get
+                    ccc
+                        (
+                        )
+                    {
+                        ;
+                    },
+                    [
+                        d
+                    ]
+                        :
+                        1,
+                    get
+                    [
+                        e
+                    ]
+                        (
+                        )
+                    {
+                        ;
+                    }
+                }"
+                v-bind:b="class {
+                    bbb
+                        (
+                            a
+                            ,
+                            b
+                        )
+                    {
+                        ;
+                    }
+                    static
+                    get
+                    ccc
+                        (
+                        )
+                    {
+                        ;
+                    }
+                    [
+                        d
+                    ]
+                        (
+                        )
+                    {
+                        ;
+                    }
+                    get
+                    [
+                        e
+                    ]
+                        (
+                        )
+                    {
+                        ;
+                    }
+                }"
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 8 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 10 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 11 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 13 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 14 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 15 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 20 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 21 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 22 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 23 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 24 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 25 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 26 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 27 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 28 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 29 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 30 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 31 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 32 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 33 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 34 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 35 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 36 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 37 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 38 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 41 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 42 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 43 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 44 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 45 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 46 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 47 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 48 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 49 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 50 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 51 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 52 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 53 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 54 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 55 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 56 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 57 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 58 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 59 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 60 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 61 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 62 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 63 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 64 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 65 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 66 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 67 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 68 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 69 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 70 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 71 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 72 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 73 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 74 }
+      ]
+    },
+
     // ObjectExpression
     {
       code: unIndent`
@@ -1154,6 +2841,117 @@ tester.run('html-indent', rule, {
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 5 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 8 },
         { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 9 }
+      ]
+    },
+
+    // TryStatement / CatchClause
+    {
+      code: unIndent`
+        <template>
+            <div
+                v-on:a="
+                  try
+                  {
+                  }
+                  catch
+                  (
+                  err
+                  )
+                  {
+                  }
+                "
+                v-on:b="
+                  try
+                  {
+                  }
+                  finally
+                  {
+                  }
+                "
+                v-on:c="
+                  try
+                  {
+                  }
+                  catch
+                  (
+                  err
+                  )
+                  {
+                  }
+                  finally
+                  {
+                  }
+                "
+            ></div>
+        </template>
+      `,
+      output: unIndent`
+        <template>
+            <div
+                v-on:a="
+                    try
+                    {
+                    }
+                    catch
+                        (
+                            err
+                        )
+                    {
+                    }
+                "
+                v-on:b="
+                    try
+                    {
+                    }
+                    finally
+                    {
+                    }
+                "
+                v-on:c="
+                    try
+                    {
+                    }
+                    catch
+                        (
+                            err
+                        )
+                    {
+                    }
+                    finally
+                    {
+                    }
+                "
+            ></div>
+        </template>
+      `,
+      errors: [
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 4 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 5 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 6 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 7 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 8 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 9 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 10 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 11 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 12 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 15 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 16 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 17 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 18 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 19 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 20 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 23 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 24 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 25 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 26 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 27 },
+        { message: 'Expected indentation of 20 spaces but found 10 spaces.', line: 28 },
+        { message: 'Expected indentation of 16 spaces but found 10 spaces.', line: 29 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 30 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 31 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 32 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 33 },
+        { message: 'Expected indentation of 12 spaces but found 10 spaces.', line: 34 }
       ]
     },
 
