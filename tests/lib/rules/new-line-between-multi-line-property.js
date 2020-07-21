@@ -124,6 +124,70 @@ ruleTester.run('new-line-between-multi-line-property', rule, {
         'Enforce new lines between multi-line properties in Vue components.'
       ]
     },
+    {
+      filename: 'test.vue',
+      code: `
+      <script>
+      export default {
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+
+          focused: {
+            type: Boolean,
+            default: false
+          },
+          label: String,
+          icon: String
+        },
+
+        staticMethodFn() {
+          fn({
+            a: {
+              propA: this.propA,
+            },
+            b: null,
+          });
+        },
+      }
+      </script>
+      `,
+      output: `
+      <script>
+      export default {
+        props: {
+          value: {
+            type: String,
+            required: true
+          },
+
+          focused: {
+            type: Boolean,
+            default: false
+          },
+
+          label: String,
+          icon: String
+        },
+
+        staticMethodFn() {
+          fn({
+            a: {
+              propA: this.propA,
+            },
+            b: null,
+          });
+        },
+      }
+      </script>
+      `,
+      errors: [
+        'Enforce new lines between multi-line properties in Vue components.',
+        'Enforce new lines between multi-line properties in Vue components.'
+      ]
+    },
     // test bad example of proposal https://github.com/vuejs/eslint-plugin-vue/issues/391
     {
       filename: 'test.vue',
