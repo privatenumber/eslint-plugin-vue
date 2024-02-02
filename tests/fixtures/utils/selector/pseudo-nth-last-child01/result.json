@@ -1,9 +1,0 @@
-{
-    "selector": "tr:nth-last-child(-n+3)",
-    "matches": [
-        "<tr class=\"tr3\">",
-        "<tr class=\"tr4\">",
-        "<tr class=\"tr5\">"
-    ],
-    "errors": []
-}

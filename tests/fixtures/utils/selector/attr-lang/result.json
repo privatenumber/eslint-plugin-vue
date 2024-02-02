@@ -1,9 +1,0 @@
-{
-    "selector": "div[lang|=\"zh\"]",
-    "matches": [
-        "<div lang=\"zh\">",
-        "<div lang=\"zh-CN\">",
-        "<div lang=\"zh-TW\">"
-    ],
-    "errors": []
-}

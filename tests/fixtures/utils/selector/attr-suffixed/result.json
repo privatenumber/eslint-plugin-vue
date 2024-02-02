@@ -1,8 +1,0 @@
-{
-    "selector": "a[href$=\".org\"]",
-    "matches": [
-        "<a href=\"http://example.org\">",
-        "<a href=\"https://example.org\">"
-    ],
-    "errors": []
-}

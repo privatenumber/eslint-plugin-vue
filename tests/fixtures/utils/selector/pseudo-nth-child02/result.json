@@ -1,8 +1,0 @@
-{
-    "selector": ".foo:nth-child(odd)",
-    "matches": [
-        "<div class=\"foo a\">",
-        "<div class=\"foo c\">"
-    ],
-    "errors": []
-}

@@ -1,9 +1,0 @@
-{
-    "selector": ":not(.foo)",
-    "matches": [
-        "<template>",
-        "<div class=\"f\">",
-        "<p class=\"bar\">"
-    ],
-    "errors": []
-}

@@ -1,7 +1,0 @@
-{
-    "selector": ".foo /unknown/ .bar",
-    "matches": [],
-    "errors": [
-        "Unknown combinator: /unknown/."
-    ]
-}

@@ -1,7 +1,0 @@
-{
-    "selector": ".foo /* comment */ :is(.bar, /* comment */)",
-    "matches": [],
-    "errors": [
-        "Unexpected empty selector."
-    ]
-}

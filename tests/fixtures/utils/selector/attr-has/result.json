@@ -1,8 +1,0 @@
-{
-    "selector": "[foo]",
-    "matches": [
-        "<div foo=\"foo\">",
-        "<p foo>"
-    ],
-    "errors": []
-}

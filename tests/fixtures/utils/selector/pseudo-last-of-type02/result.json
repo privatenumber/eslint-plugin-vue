@@ -1,8 +1,0 @@
-{
-    "selector": ".root > :last-of-type",
-    "matches": [
-        "<h2 class=\"a\">",
-        "<p class=\"c\">"
-    ],
-    "errors": []
-}
